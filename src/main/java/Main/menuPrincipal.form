@@ -71,10 +71,13 @@
             <Property name="text" type="java.lang.String" value="Datos personales"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="datosDocente">
+            <MenuItem class="javax.swing.JMenuItem" name="datosAltaDocente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alta docente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="datosAltaDocenteActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="datosProfesionales">
               <Properties>

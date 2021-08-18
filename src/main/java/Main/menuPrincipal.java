@@ -2,6 +2,7 @@ package Main;
 
 
 import Admistrativo.AltasAdministrativo;
+import DatosPersonales.AltaDocente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -53,7 +54,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuEstudios = new javax.swing.JMenu();
         estudioPlan = new javax.swing.JMenuItem();
         menuDatosPersonales = new javax.swing.JMenu();
-        datosDocente = new javax.swing.JMenuItem();
+        datosAltaDocente = new javax.swing.JMenuItem();
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
@@ -142,8 +143,13 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         menuDatosPersonales.setText("Datos personales");
 
-        datosDocente.setText("Alta docente");
-        menuDatosPersonales.add(datosDocente);
+        datosAltaDocente.setText("Alta docente");
+        datosAltaDocente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datosAltaDocenteActionPerformed(evt);
+            }
+        });
+        menuDatosPersonales.add(datosAltaDocente);
 
         datosProfesionales.setText("Alta datos profesionales");
         menuDatosPersonales.add(datosProfesionales);
@@ -207,6 +213,13 @@ public class menuPrincipal extends javax.swing.JFrame {
         Connection conexion =  getConnection();
     }//GEN-LAST:event_conectarBaseActionPerformed
 
+    private void datosAltaDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosAltaDocenteActionPerformed
+        // TODO add your handling code here:
+        AltaDocente alta = new AltaDocente();
+        alta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_datosAltaDocenteActionPerformed
+
     public Connection getConnection(){
         Connection conexion=null;
         
@@ -266,7 +279,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton conectarBase;
     private javax.swing.JMenuItem consultaConsulta;
     private javax.swing.JMenuItem consultaPerfil;
-    private javax.swing.JMenuItem datosDocente;
+    private javax.swing.JMenuItem datosAltaDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
     private javax.swing.JLabel jLabel1;
