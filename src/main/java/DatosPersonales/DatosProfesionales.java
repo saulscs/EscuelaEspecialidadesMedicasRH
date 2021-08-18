@@ -5,6 +5,8 @@
  */
 package DatosPersonales;
 
+import Main.menuPrincipal;
+
 /**
  *
  * @author saulcorona
@@ -27,21 +29,292 @@ public class DatosProfesionales extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        especialidades = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        salirDatosProfesionales = new javax.swing.JButton();
+        menuPrincipal = new javax.swing.JMenuBar();
+        menuAdministrativo = new javax.swing.JMenu();
+        admiAltas = new javax.swing.JMenuItem();
+        admiBajas = new javax.swing.JMenuItem();
+        admiConsultas = new javax.swing.JMenuItem();
+        menuAlumnos = new javax.swing.JMenu();
+        alumnoAltas = new javax.swing.JMenuItem();
+        alumnoBajas = new javax.swing.JMenuItem();
+        alumnoConsulta = new javax.swing.JMenuItem();
+        menuEstudios = new javax.swing.JMenu();
+        estudioPlan = new javax.swing.JMenuItem();
+        menuDatosPersonales = new javax.swing.JMenu();
+        datosDocente = new javax.swing.JMenuItem();
+        datosProfesionales = new javax.swing.JMenuItem();
+        menuConsultas = new javax.swing.JMenu();
+        consultaConsulta = new javax.swing.JMenuItem();
+        consultaPerfil = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setText("Datos profesionales");
+
+        jLabel2.setText("Experiencia profesional");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Trabajo anterior");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Cedula profesional");
+
+        jLabel5.setText("Especialidad");
+
+        especialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médico cirujano", "Médico general", "Médico forense" }));
+
+        jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        salirDatosProfesionales.setText("Salir");
+        salirDatosProfesionales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirDatosProfesionalesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(salirDatosProfesionales)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                .addComponent(jTextField1)
+                                .addComponent(jTextField3)
+                                .addComponent(especialidades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(especialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(salirDatosProfesionales))
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+
+        menuAdministrativo.setText("Administrativo");
+        menuAdministrativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAdministrativoActionPerformed(evt);
+            }
+        });
+
+        admiAltas.setText("Altas");
+        admiAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admiAltasActionPerformed(evt);
+            }
+        });
+        menuAdministrativo.add(admiAltas);
+
+        admiBajas.setText("Bajas");
+        menuAdministrativo.add(admiBajas);
+
+        admiConsultas.setText("Consultas");
+        menuAdministrativo.add(admiConsultas);
+
+        menuPrincipal.add(menuAdministrativo);
+
+        menuAlumnos.setText("Alumnos");
+
+        alumnoAltas.setText("Altas");
+        menuAlumnos.add(alumnoAltas);
+
+        alumnoBajas.setText("Bajas");
+        menuAlumnos.add(alumnoBajas);
+
+        alumnoConsulta.setText("Colsultas");
+        menuAlumnos.add(alumnoConsulta);
+
+        menuPrincipal.add(menuAlumnos);
+
+        menuEstudios.setText("Estudios");
+
+        estudioPlan.setText("Plan de estudios");
+        menuEstudios.add(estudioPlan);
+
+        menuPrincipal.add(menuEstudios);
+
+        menuDatosPersonales.setText("Datos personales");
+
+        datosDocente.setText("Alta docente");
+        menuDatosPersonales.add(datosDocente);
+
+        datosProfesionales.setText("Alta datos profesionales");
+        menuDatosPersonales.add(datosProfesionales);
+
+        menuPrincipal.add(menuDatosPersonales);
+
+        menuConsultas.setText("Consultas");
+
+        consultaConsulta.setText("Consulta");
+        consultaConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaConsultaActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaConsulta);
+
+        consultaPerfil.setText("Perfil");
+        menuConsultas.add(consultaPerfil);
+
+        menuPrincipal.add(menuConsultas);
+
+        setJMenuBar(menuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void admiAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiAltasActionPerformed
+
+    }//GEN-LAST:event_admiAltasActionPerformed
+
+    private void menuAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdministrativoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuAdministrativoActionPerformed
+
+    private void consultaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaConsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaConsultaActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void salirDatosProfesionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirDatosProfesionalesActionPerformed
+        menuPrincipal menu = new menuPrincipal();
+        menu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_salirDatosProfesionalesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +352,37 @@ public class DatosProfesionales extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem admiAltas;
+    private javax.swing.JMenuItem admiBajas;
+    private javax.swing.JMenuItem admiConsultas;
+    private javax.swing.JMenuItem alumnoAltas;
+    private javax.swing.JMenuItem alumnoBajas;
+    private javax.swing.JMenuItem alumnoConsulta;
+    private javax.swing.JMenuItem consultaConsulta;
+    private javax.swing.JMenuItem consultaPerfil;
+    private javax.swing.JMenuItem datosDocente;
+    private javax.swing.JMenuItem datosProfesionales;
+    private javax.swing.JComboBox<String> especialidades;
+    private javax.swing.JMenuItem estudioPlan;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JMenu menuAdministrativo;
+    private javax.swing.JMenu menuAlumnos;
+    private javax.swing.JMenu menuConsultas;
+    private javax.swing.JMenu menuDatosPersonales;
+    private javax.swing.JMenu menuEstudios;
+    private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JButton salirDatosProfesionales;
     // End of variables declaration//GEN-END:variables
 }

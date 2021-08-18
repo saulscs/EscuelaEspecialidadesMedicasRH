@@ -3,6 +3,7 @@ package Main;
 
 import Admistrativo.AltasAdministrativo;
 import DatosPersonales.AltaDocente;
+import DatosPersonales.DatosProfesionales;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -152,6 +153,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuDatosPersonales.add(datosAltaDocente);
 
         datosProfesionales.setText("Alta datos profesionales");
+        datosProfesionales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datosProfesionalesActionPerformed(evt);
+            }
+        });
         menuDatosPersonales.add(datosProfesionales);
 
         menuPrincipal.add(menuDatosPersonales);
@@ -219,6 +225,12 @@ public class menuPrincipal extends javax.swing.JFrame {
         alta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_datosAltaDocenteActionPerformed
+
+    private void datosProfesionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosProfesionalesActionPerformed
+        DatosProfesionales profesionales = new DatosProfesionales();
+        profesionales.setVisible(true);
+         this.setVisible(false);
+    }//GEN-LAST:event_datosProfesionalesActionPerformed
 
     public Connection getConnection(){
         Connection conexion=null;
