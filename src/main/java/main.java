@@ -12,6 +12,8 @@
 //Clase principal
 public class main {
     public static void main(String[] args){
-    
+        menuPrincipal menu1 = new menuPrincipal();
+        
+        menu1.setVisible(true);
     }
 }
