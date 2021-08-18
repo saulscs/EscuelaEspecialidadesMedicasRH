@@ -2,6 +2,9 @@ package Main;
 
 
 import Admistrativo.AltasAdministrativo;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,6 +17,10 @@ import Admistrativo.AltasAdministrativo;
  * @author saulcorona
  */
 public class menuPrincipal extends javax.swing.JFrame {
+    
+    public static final String URL = "jdbc:mysql://localhost:3306/platziblog";
+    public static final String usuario ="root";
+    public static final String contraseña = "usuario";
 
     /**
      * Creates new form menuPrincipal
@@ -33,6 +40,7 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        conectarBase = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuAdministrativo = new javax.swing.JMenu();
         admiAltas = new javax.swing.JMenuItem();
@@ -58,21 +66,35 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Escuela de especialidades clinicas");
 
+        conectarBase.setText("Conectar base de datos");
+        conectarBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conectarBaseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(conectarBase)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addComponent(conectarBase)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         menuAdministrativo.setText("Administrativo");
@@ -152,7 +174,7 @@ public class menuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +203,24 @@ public class menuPrincipal extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_admiAltasActionPerformed
 
+    private void conectarBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarBaseActionPerformed
+        Connection conexion =  getConnection();
+    }//GEN-LAST:event_conectarBaseActionPerformed
+
+    public Connection getConnection(){
+        Connection conexion=null;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection(URL, usuario, contraseña );
+            JOptionPane.showMessageDialog(null, "Conexion exitosa");
+                    
+        }catch(Exception ex){
+            System.err.println("Error, " + ex);
+        }
+        
+        return conexion;
+    }
     /**
      * @param args the command line arguments
      */
@@ -223,6 +263,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
+    private javax.swing.JButton conectarBase;
     private javax.swing.JMenuItem consultaConsulta;
     private javax.swing.JMenuItem consultaPerfil;
     private javax.swing.JMenuItem datosDocente;
