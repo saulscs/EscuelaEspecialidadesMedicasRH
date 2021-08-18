@@ -1,3 +1,8 @@
+package Main;
+
+
+import Admistrativo.AltasAdministrativo;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -48,28 +53,41 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         jLabel1.setText("Escuela de especialidades clinicas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         menuAdministrativo.setText("Administrativo");
+        menuAdministrativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAdministrativoActionPerformed(evt);
+            }
+        });
 
         admiAltas.setText("Altas");
+        admiAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admiAltasActionPerformed(evt);
+            }
+        });
         menuAdministrativo.add(admiAltas);
 
         admiBajas.setText("Bajas");
@@ -134,14 +152,14 @@ public class menuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,6 +168,18 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void consultaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaConsultaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaConsultaActionPerformed
+
+    private void menuAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdministrativoActionPerformed
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_menuAdministrativoActionPerformed
+
+    private void admiAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiAltasActionPerformed
+       AltasAdministrativo altas = new AltasAdministrativo();
+       
+       altas.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_admiAltasActionPerformed
 
     /**
      * @param args the command line arguments
