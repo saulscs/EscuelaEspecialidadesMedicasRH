@@ -1,33 +1,20 @@
-package Main;
-
-
-import Admistrativo.AltasAdministrativo;
-import Consultas.Busqueda;
-import Consultas.Perfil;
-import DatosPersonales.AltaDocente;
-import DatosPersonales.DatosProfesionales;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import javax.swing.JOptionPane;
-
 /*
- * Menu principal
+ * Modulo de consultas
  */
+package Consultas;
+
+import Main.menuPrincipal;
 
 /**
  *
  * @author saulcorona
  */
-public class menuPrincipal extends javax.swing.JFrame {
-    //Variables para conexion con base de datos
-    public static final String URL = "jdbc:mysql://localhost:3306/escuela?autoReconnect=true&useSSL=false"; // Se accede al local host y se pone la tabla a la que se quiere acceder
-    public static final String usuario ="root"; // el usuario que por convención se usa root
-    public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
+public class Busqueda extends javax.swing.JFrame {
 
     /**
-     * Creates new form menuPrincipal
+     * Creates new form Busqueda
      */
-    public menuPrincipal() {
+    public Busqueda() {
         initComponents();
     }
 
@@ -42,7 +29,14 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        conectarBase = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        salirConsultaPerfil = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         menuPrincipal = new javax.swing.JMenuBar();
         menuAdministrativo = new javax.swing.JMenu();
         admiAltas = new javax.swing.JMenuItem();
@@ -55,7 +49,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuEstudios = new javax.swing.JMenu();
         estudioPlan = new javax.swing.JMenuItem();
         menuDatosPersonales = new javax.swing.JMenu();
-        datosAltaDocente = new javax.swing.JMenuItem();
+        datosDocente = new javax.swing.JMenuItem();
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
@@ -63,15 +57,20 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Escuela de especialidades clinicas");
+        jLabel1.setText("Consulta");
 
-        conectarBase.setText("Conectar base de datos");
-        conectarBase.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Numero de empleado");
+
+        jButton1.setText("Buscar");
+
+        jButton2.setText("Nueva Busqueda");
+
+        salirConsultaPerfil.setText("Salir");
+        salirConsultaPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conectarBaseActionPerformed(evt);
+                salirConsultaPerfilActionPerformed(evt);
             }
         });
 
@@ -80,23 +79,72 @@ public class menuPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(conectarBase)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(218, 218, 218)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirConsultaPerfil)
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
-                .addComponent(conectarBase)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(salirConsultaPerfil))
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuAdministrativo.setText("Administrativo");
@@ -107,11 +155,6 @@ public class menuPrincipal extends javax.swing.JFrame {
         });
 
         admiAltas.setText("Altas");
-        admiAltas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                admiAltasActionPerformed(evt);
-            }
-        });
         menuAdministrativo.add(admiAltas);
 
         admiBajas.setText("Bajas");
@@ -144,20 +187,10 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         menuDatosPersonales.setText("Datos personales");
 
-        datosAltaDocente.setText("Alta docente");
-        datosAltaDocente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                datosAltaDocenteActionPerformed(evt);
-            }
-        });
-        menuDatosPersonales.add(datosAltaDocente);
+        datosDocente.setText("Alta docente");
+        menuDatosPersonales.add(datosDocente);
 
         datosProfesionales.setText("Alta datos profesionales");
-        datosProfesionales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                datosProfesionalesActionPerformed(evt);
-            }
-        });
         menuDatosPersonales.add(datosProfesionales);
 
         menuPrincipal.add(menuDatosPersonales);
@@ -189,78 +222,44 @@ public class menuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void consultaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaConsultaActionPerformed
-        Busqueda busqueda = new Busqueda();
-        busqueda.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_consultaConsultaActionPerformed
-
     private void menuAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdministrativoActionPerformed
         // TODO add your handling code here:
-    
     }//GEN-LAST:event_menuAdministrativoActionPerformed
 
-    private void admiAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiAltasActionPerformed
-       AltasAdministrativo altas = new AltasAdministrativo();
-       
-       altas.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_admiAltasActionPerformed
+    private void consultaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaConsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaConsultaActionPerformed
 
-    private void conectarBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarBaseActionPerformed
-        Connection conexion =  getConnection();
-    }//GEN-LAST:event_conectarBaseActionPerformed
-
-    private void datosAltaDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosAltaDocenteActionPerformed
-
-        AltaDocente alta = new AltaDocente();
-        alta.setVisible(true);
+    private void salirConsultaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirConsultaPerfilActionPerformed
+        menuPrincipal principal = new menuPrincipal();
+        principal.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_datosAltaDocenteActionPerformed
-
-    private void datosProfesionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosProfesionalesActionPerformed
-        DatosProfesionales profesionales = new DatosProfesionales();
-        profesionales.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_datosProfesionalesActionPerformed
+    }//GEN-LAST:event_salirConsultaPerfilActionPerformed
 
     private void consultaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPerfilActionPerformed
-        Perfil consulta = new Perfil();
-        consulta.setVisible(true);
+        Perfil perfil = new Perfil();
+        perfil.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_consultaPerfilActionPerformed
-    
-    //Clase para establecer la conexión a la base de datos
-    public Connection getConnection(){
-        Connection conexion=null;
-        
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = (Connection) DriverManager.getConnection(URL, usuario, contraseña );
-            JOptionPane.showMessageDialog(null, "Conexion exitosa");
-                    
-        }catch(Exception ex){
-            System.err.println("Error, " + ex);
-            JOptionPane.showMessageDialog(null, "Error, " + ex);
-        }
-        
-        return conexion;
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -278,20 +277,20 @@ public class menuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menuPrincipal().setVisible(true);
+                new Busqueda().setVisible(true);
             }
         });
     }
@@ -303,19 +302,26 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
-    private javax.swing.JButton conectarBase;
     private javax.swing.JMenuItem consultaConsulta;
     private javax.swing.JMenuItem consultaPerfil;
-    private javax.swing.JMenuItem datosAltaDocente;
+    private javax.swing.JMenuItem datosDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuAlumnos;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuDatosPersonales;
     private javax.swing.JMenu menuEstudios;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JButton salirConsultaPerfil;
     // End of variables declaration//GEN-END:variables
 }

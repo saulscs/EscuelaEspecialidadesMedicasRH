@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Modulo alta docente
  */
 package DatosPersonales;
 
+import Admistrativo.AltasAdministrativo;
 import Main.menuPrincipal;
 
 /**
@@ -57,7 +56,7 @@ public class AltaDocente extends javax.swing.JFrame {
         menuEstudios = new javax.swing.JMenu();
         estudioPlan = new javax.swing.JMenuItem();
         menuDatosPersonales = new javax.swing.JMenu();
-        datosDocente = new javax.swing.JMenuItem();
+        altaDocente = new javax.swing.JMenuItem();
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
@@ -254,10 +253,20 @@ public class AltaDocente extends javax.swing.JFrame {
 
         menuDatosPersonales.setText("Datos personales");
 
-        datosDocente.setText("Alta docente");
-        menuDatosPersonales.add(datosDocente);
+        altaDocente.setText("Alta docente");
+        altaDocente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaDocenteActionPerformed(evt);
+            }
+        });
+        menuDatosPersonales.add(altaDocente);
 
         datosProfesionales.setText("Alta datos profesionales");
+        datosProfesionales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datosProfesionalesActionPerformed(evt);
+            }
+        });
         menuDatosPersonales.add(datosProfesionales);
 
         menuPrincipal.add(menuDatosPersonales);
@@ -300,7 +309,9 @@ public class AltaDocente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void admiAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiAltasActionPerformed
-        
+        AltasAdministrativo administrativo = new AltasAdministrativo();
+        administrativo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_admiAltasActionPerformed
 
     private void menuAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdministrativoActionPerformed
@@ -347,6 +358,17 @@ public class AltaDocente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void altaDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaDocenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_altaDocenteActionPerformed
+
+    private void datosProfesionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosProfesionalesActionPerformed
+        // TODO add your handling code here:
+        DatosProfesionales profesionales = new DatosProfesionales();
+        profesionales.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_datosProfesionalesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,12 +408,12 @@ public class AltaDocente extends javax.swing.JFrame {
     private javax.swing.JMenuItem admiAltas;
     private javax.swing.JMenuItem admiBajas;
     private javax.swing.JMenuItem admiConsultas;
+    private javax.swing.JMenuItem altaDocente;
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
     private javax.swing.JMenuItem consultaConsulta;
     private javax.swing.JMenuItem consultaPerfil;
-    private javax.swing.JMenuItem datosDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
     private javax.swing.JButton jButton1;
