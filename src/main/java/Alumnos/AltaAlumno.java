@@ -5,14 +5,44 @@
  */
 
 package Alumnos;
+import static Admistrativo.AltasAdministrativo.URL;
+import static Admistrativo.AltasAdministrativo.contraseña;
+import static Admistrativo.AltasAdministrativo.usuario;
+import Consultas.Perfil;
 import Main.menuPrincipal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author saulcorona
  */
 public class AltaAlumno extends javax.swing.JFrame {
-
+     //Variables para conexion con base de datos
+    public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
+    public static final String usuario ="root"; // el usuario que por convención se usa root
+    public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
+    PreparedStatement ps;
+    ResultSet rs;
+    
+    public Connection getConnection(){
+        Connection conexion=null;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection(URL, usuario, contraseña );
+            //JOptionPane.showMessageDialog(null, "Conexion exitosa");
+                    
+        }catch(Exception ex){
+            System.err.println("Error, " + ex);
+            JOptionPane.showMessageDialog(null, "Error, " + ex);
+        }
+        
+        return conexion;
+    }
     /**
      * Creates new form AltaAlumno
      */
@@ -38,13 +68,15 @@ public class AltaAlumno extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TelefonoAltaAlumno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        CorreoAltaAlumno1 = new javax.swing.JTextField();
+        CorreoAltaAlumno = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         CurpAltaAlumno = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         SubirDocumentoAltaAlumno = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        AltasAlumnos = new javax.swing.JButton();
         SalirAltaAlumnos = new javax.swing.JButton();
+        LimpiarAltaAlumnos1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         menuPrincipal = new javax.swing.JMenuBar();
         menuAdministrativo = new javax.swing.JMenu();
         admiAltas = new javax.swing.JMenuItem();
@@ -61,7 +93,8 @@ public class AltaAlumno extends javax.swing.JFrame {
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
-        consultaPerfil = new javax.swing.JMenuItem();
+        menuPerfilProfesional = new javax.swing.JMenu();
+        altaPerfilProfesional = new javax.swing.JMenuItem();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -95,9 +128,9 @@ public class AltaAlumno extends javax.swing.JFrame {
 
         jLabel5.setText("Telefono");
 
-        CorreoAltaAlumno1.addActionListener(new java.awt.event.ActionListener() {
+        CorreoAltaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CorreoAltaAlumno1ActionPerformed(evt);
+                CorreoAltaAlumnoActionPerformed(evt);
             }
         });
 
@@ -113,7 +146,12 @@ public class AltaAlumno extends javax.swing.JFrame {
 
         SubirDocumentoAltaAlumno.setText("Subir");
 
-        jButton1.setText("Altas");
+        AltasAlumnos.setText("Altas");
+        AltasAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AltasAlumnosActionPerformed(evt);
+            }
+        });
 
         SalirAltaAlumnos.setText("Salir");
         SalirAltaAlumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +159,15 @@ public class AltaAlumno extends javax.swing.JFrame {
                 SalirAltaAlumnosActionPerformed(evt);
             }
         });
+
+        LimpiarAltaAlumnos1.setText("Limpiar");
+        LimpiarAltaAlumnos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarAltaAlumnos1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("(Funcion no disponible)");
 
         menuAdministrativo.setText("Administrativo");
         menuAdministrativo.addActionListener(new java.awt.event.ActionListener() {
@@ -180,10 +227,19 @@ public class AltaAlumno extends javax.swing.JFrame {
         });
         menuConsultas.add(consultaConsulta);
 
-        consultaPerfil.setText("Perfil");
-        menuConsultas.add(consultaPerfil);
-
         menuPrincipal.add(menuConsultas);
+
+        menuPerfilProfesional.setText("Perfil Profesional");
+
+        altaPerfilProfesional.setText("Altas");
+        altaPerfilProfesional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaPerfilProfesionalActionPerformed(evt);
+            }
+        });
+        menuPerfilProfesional.add(altaPerfilProfesional);
+
+        menuPrincipal.add(menuPerfilProfesional);
 
         setJMenuBar(menuPrincipal);
 
@@ -196,34 +252,40 @@ public class AltaAlumno extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DireccionAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CorreoAltaAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton1))
-                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CurpAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TelefonoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(AltasAlumnos)
+                                .addGap(34, 34, 34)
+                                .addComponent(LimpiarAltaAlumnos1))
+                            .addComponent(nombreAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DireccionAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CorreoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(SubirDocumentoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(SalirAltaAlumnos))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CurpAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TelefonoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(SubirDocumentoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(SalirAltaAlumnos)))))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,13 +312,16 @@ public class AltaAlumno extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(CorreoAltaAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CorreoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(SubirDocumentoAltaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(SalirAltaAlumnos))
+                    .addComponent(AltasAlumnos)
+                    .addComponent(SalirAltaAlumnos)
+                    .addComponent(LimpiarAltaAlumnos1))
                 .addGap(29, 29, 29))
         );
 
@@ -283,9 +348,9 @@ public class AltaAlumno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TelefonoAltaAlumnoActionPerformed
 
-    private void CorreoAltaAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoAltaAlumno1ActionPerformed
+    private void CorreoAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoAltaAlumnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CorreoAltaAlumno1ActionPerformed
+    }//GEN-LAST:event_CorreoAltaAlumnoActionPerformed
 
     private void CurpAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurpAltaAlumnoActionPerformed
         // TODO add your handling code here:
@@ -297,6 +362,51 @@ public class AltaAlumno extends javax.swing.JFrame {
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_SalirAltaAlumnosActionPerformed
+
+    private void altaPerfilProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaPerfilProfesionalActionPerformed
+        // TODO add your handling code here:
+        Perfil consulta = new Perfil();
+        consulta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_altaPerfilProfesionalActionPerformed
+
+    private void AltasAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltasAlumnosActionPerformed
+        // TODO add your handling code here:
+        //Enviar información a la base de datos
+        Connection conexion = null;
+        
+        try{
+            conexion = getConnection();
+            ps = conexion.prepareStatement("insert into proyectoSaul.alumnos (nombre,direccion,correo,telefono, curp, documento) values(?,?,?,?,?,?)");
+            ps.setString(1, nombreAltaAlumno.getText());
+            ps.setString(2, DireccionAltaAlumno.getText());
+            ps.setString(3, CorreoAltaAlumno.getText());
+            ps.setString(4, TelefonoAltaAlumno.getText());
+            ps.setString(5, CurpAltaAlumno.getText());
+            ps.setString(6, SubirDocumentoAltaAlumno.getText());
+            
+            int resultado = ps.executeUpdate(); //Ejecutamos la inserción en la base de datos
+            
+            if(resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Registro insertado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al insertar el registro");
+            }
+            conexion.close();
+        }catch(Exception ex){
+            System.err.println("Error, "+ex);
+        }
+    }//GEN-LAST:event_AltasAlumnosActionPerformed
+
+    private void LimpiarAltaAlumnos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarAltaAlumnos1ActionPerformed
+        // TODO add your handling code here:
+        nombreAltaAlumno.setText(null);
+        DireccionAltaAlumno.setText(null);
+        CorreoAltaAlumno.setText(null);
+        TelefonoAltaAlumno.setText(null);
+        CurpAltaAlumno.setText(null);
+        SubirDocumentoAltaAlumno.setText(null);
+    }//GEN-LAST:event_LimpiarAltaAlumnos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,24 +444,25 @@ public class AltaAlumno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CorreoAltaAlumno1;
+    private javax.swing.JButton AltasAlumnos;
+    private javax.swing.JTextField CorreoAltaAlumno;
     private javax.swing.JTextField CurpAltaAlumno;
     private javax.swing.JTextField DireccionAltaAlumno;
+    private javax.swing.JButton LimpiarAltaAlumnos1;
     private javax.swing.JButton SalirAltaAlumnos;
     private javax.swing.JTextField SubirDocumentoAltaAlumno;
     private javax.swing.JTextField TelefonoAltaAlumno;
     private javax.swing.JMenuItem admiAltas;
     private javax.swing.JMenuItem admiBajas;
     private javax.swing.JMenuItem admiConsultas;
+    private javax.swing.JMenuItem altaPerfilProfesional;
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
     private javax.swing.JMenuItem consultaConsulta;
-    private javax.swing.JMenuItem consultaPerfil;
     private javax.swing.JMenuItem datosDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
-    private javax.swing.JButton jButton1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -360,11 +471,13 @@ public class AltaAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuAlumnos;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuDatosPersonales;
     private javax.swing.JMenu menuEstudios;
+    private javax.swing.JMenu menuPerfilProfesional;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JTextField nombreAltaAlumno;
     // End of variables declaration//GEN-END:variables

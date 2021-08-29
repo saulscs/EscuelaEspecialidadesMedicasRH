@@ -9,6 +9,8 @@ import DatosPersonales.DatosProfesionales;
 import Alumnos.AltaAlumno;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /*
@@ -24,7 +26,6 @@ public class menuPrincipal extends javax.swing.JFrame {
     public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
     public static final String usuario ="root"; // el usuario que por convención se usa root
     public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
-
     /**
      * Creates new form menuPrincipal
      */
@@ -234,6 +235,24 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void conectarBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarBaseActionPerformed
         Connection conexion =  getConnection();
+        //Codigo para probar que si se establecio la conexion
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = conexion.prepareStatement("select * from proyectoSaul.administrativo");
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "RFC, " + rs.getString("no_empleado"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existen registros");
+            }
+            conexion.close();
+        } catch(Exception ex){
+            System.err.println("Error, " + ex);
+        }
+        
     }//GEN-LAST:event_conectarBaseActionPerformed
 
     private void datosAltaDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosAltaDocenteActionPerformed

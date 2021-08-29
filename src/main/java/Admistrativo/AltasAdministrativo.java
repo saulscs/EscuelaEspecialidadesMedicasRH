@@ -4,14 +4,45 @@
 
 package Admistrativo;
 
+import Consultas.Perfil;
 import Main.menuPrincipal;
+import static Main.menuPrincipal.URL;
+import static Main.menuPrincipal.contraseña;
+import static Main.menuPrincipal.usuario;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author saulcorona
  */
 public class AltasAdministrativo extends javax.swing.JFrame {
-
+    
+     //Variables para conexion con base de datos
+    public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
+    public static final String usuario ="root"; // el usuario que por convención se usa root
+    public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
+    PreparedStatement ps;
+    ResultSet rs;
+    
+    public Connection getConnection(){
+        Connection conexion=null;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection(URL, usuario, contraseña );
+            //JOptionPane.showMessageDialog(null, "Conexion exitosa");
+                    
+        }catch(Exception ex){
+            System.err.println("Error, " + ex);
+            JOptionPane.showMessageDialog(null, "Error, " + ex);
+        }
+        
+        return conexion;
+    }
     /**
      * Creates new form AltasAdministrativo
      */
@@ -30,19 +61,17 @@ public class AltasAdministrativo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        altaPuesto = new javax.swing.JTextField();
+        altaRfc = new javax.swing.JTextField();
+        altaNoEmpleado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        altaArea = new javax.swing.JTextField();
         salirAlta = new javax.swing.JButton();
         altasAdministrativoGuardar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        LimpiarAltaAdministrativo = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuAdministrativo = new javax.swing.JMenu();
         admiAltas = new javax.swing.JMenuItem();
@@ -59,23 +88,14 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
-        consultaPerfil = new javax.swing.JMenuItem();
+        menuPerfilProfesional = new javax.swing.JMenu();
+        altaPerfilProfesional = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setText("Administrativo > altas");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("RFC");
 
@@ -85,9 +105,9 @@ public class AltasAdministrativo extends javax.swing.JFrame {
 
         jLabel6.setText("Puesto");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        altaArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                altaAreaActionPerformed(evt);
             }
         });
 
@@ -105,84 +125,72 @@ public class AltasAdministrativo extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Conexion base de datos");
+        LimpiarAltaAdministrativo.setText("Limpiar");
+        LimpiarAltaAdministrativo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarAltaAdministrativoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(salirAlta)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(46, 46, 46))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addComponent(altasAdministrativoGuardar)
-                    .addContainerGap(466, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel4))
+                    .addComponent(altasAdministrativoGuardar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(altaArea, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(altaPuesto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(altaRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(altaNoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LimpiarAltaAdministrativo)
+                        .addGap(18, 18, 18)
+                        .addComponent(salirAlta)))
+                .addGap(201, 323, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(salirAlta))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(279, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(altaRfc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(altaNoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(altaArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(altaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salirAlta)
                     .addComponent(altasAdministrativoGuardar)
-                    .addContainerGap()))
+                    .addComponent(LimpiarAltaAdministrativo))
+                .addContainerGap())
         );
 
         menuAdministrativo.setText("Administrativo");
@@ -243,10 +251,19 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         });
         menuConsultas.add(consultaConsulta);
 
-        consultaPerfil.setText("Perfil");
-        menuConsultas.add(consultaPerfil);
-
         menuPrincipal.add(menuConsultas);
+
+        menuPerfilProfesional.setText("Perfil Profesional");
+
+        altaPerfilProfesional.setText("Altas");
+        altaPerfilProfesional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaPerfilProfesionalActionPerformed(evt);
+            }
+        });
+        menuPerfilProfesional.add(altaPerfilProfesional);
+
+        menuPrincipal.add(menuPerfilProfesional);
 
         setJMenuBar(menuPrincipal);
 
@@ -279,9 +296,9 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaConsultaActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void altaAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaAreaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_altaAreaActionPerformed
 
     private void salirAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirAltaActionPerformed
         menuPrincipal menu = new menuPrincipal();
@@ -291,8 +308,44 @@ public class AltasAdministrativo extends javax.swing.JFrame {
     }//GEN-LAST:event_salirAltaActionPerformed
 
     private void altasAdministrativoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altasAdministrativoGuardarActionPerformed
-        // TODO add your handling code here:
+        //Enviar información a la base de datos
+        Connection conexion = null;
+        
+        try{
+            conexion = getConnection();
+            ps = conexion.prepareStatement("insert into proyectoSaul.administrativo (rfc,no_empleado,area,puesto) values(?,?,?,?)");
+            ps.setString(1, altaRfc.getText());
+            ps.setString(2, altaNoEmpleado.getText());
+            ps.setString(3, altaArea.getText());
+            ps.setString(4, altaPuesto.getText());
+            
+            int resultado = ps.executeUpdate(); //Ejecutamos la inserción en la base de datos
+            
+            if(resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Registro insertado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al insertar el registro");
+            }
+            conexion.close();
+        }catch(Exception ex){
+            System.err.println("Error, "+ex);
+        }
     }//GEN-LAST:event_altasAdministrativoGuardarActionPerformed
+
+    private void altaPerfilProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaPerfilProfesionalActionPerformed
+        // TODO add your handling code here:
+        Perfil consulta = new Perfil();
+        consulta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_altaPerfilProfesionalActionPerformed
+
+    private void LimpiarAltaAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarAltaAdministrativoActionPerformed
+        // TODO add your handling code here:
+        altaRfc.setText(null);
+        altaNoEmpleado.setText(null);
+        altaArea.setText(null);
+        altaPuesto.setText(null);
+    }//GEN-LAST:event_LimpiarAltaAdministrativoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,36 +383,35 @@ public class AltasAdministrativo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LimpiarAltaAdministrativo;
     private javax.swing.JMenuItem admiAltas;
     private javax.swing.JMenuItem admiBajas;
     private javax.swing.JMenuItem admiConsultas;
+    private javax.swing.JTextField altaArea;
+    private javax.swing.JTextField altaNoEmpleado;
+    private javax.swing.JMenuItem altaPerfilProfesional;
+    private javax.swing.JTextField altaPuesto;
+    private javax.swing.JTextField altaRfc;
     private javax.swing.JButton altasAdministrativoGuardar;
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
     private javax.swing.JMenuItem consultaConsulta;
-    private javax.swing.JMenuItem consultaPerfil;
     private javax.swing.JMenuItem datosDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuAlumnos;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuDatosPersonales;
     private javax.swing.JMenu menuEstudios;
+    private javax.swing.JMenu menuPerfilProfesional;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JButton salirAlta;
     // End of variables declaration//GEN-END:variables
