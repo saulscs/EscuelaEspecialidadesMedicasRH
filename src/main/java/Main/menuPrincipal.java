@@ -21,9 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class menuPrincipal extends javax.swing.JFrame {
     //Variables para conexion con base de datos
-    public static final String URL = "jdbc:mysql://localhost:3306/escuela?autoReconnect=true&useSSL=false"; // Se accede al local host y se pone la tabla a la que se quiere acceder
+    public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
     public static final String usuario ="root"; // el usuario que por convención se usa root
-    public static final String contraseña = "escpre18"; // Aqui se coloca la contraseña de MySQL server
+    public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
 
     /**
      * Creates new form menuPrincipal
@@ -199,16 +199,16 @@ public class menuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(122, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
