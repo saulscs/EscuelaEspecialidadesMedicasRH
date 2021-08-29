@@ -6,6 +6,7 @@ import Consultas.Busqueda;
 import Consultas.Perfil;
 import DatosPersonales.AltaDocente;
 import DatosPersonales.DatosProfesionales;
+import Alumnos.AltaAlumno;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     //Variables para conexion con base de datos
     public static final String URL = "jdbc:mysql://localhost:3306/escuela?autoReconnect=true&useSSL=false"; // Se accede al local host y se pone la tabla a la que se quiere acceder
     public static final String usuario ="root"; // el usuario que por convención se usa root
-    public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
+    public static final String contraseña = "escpre18"; // Aqui se coloca la contraseña de MySQL server
 
     /**
      * Creates new form menuPrincipal
@@ -59,7 +60,8 @@ public class menuPrincipal extends javax.swing.JFrame {
         datosProfesionales = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consultaConsulta = new javax.swing.JMenuItem();
-        consultaPerfil = new javax.swing.JMenuItem();
+        menuPerfilProfesional = new javax.swing.JMenu();
+        altaPerfilProfesional = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,23 +82,22 @@ public class menuPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(conectarBase)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(conectarBase)
+                        .addGap(28, 28, 28)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+                .addGap(70, 70, 70)
                 .addComponent(conectarBase)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         menuAdministrativo.setText("Administrativo");
@@ -125,6 +126,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuAlumnos.setText("Alumnos");
 
         alumnoAltas.setText("Altas");
+        alumnoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumnoAltasActionPerformed(evt);
+            }
+        });
         menuAlumnos.add(alumnoAltas);
 
         alumnoBajas.setText("Bajas");
@@ -172,15 +178,19 @@ public class menuPrincipal extends javax.swing.JFrame {
         });
         menuConsultas.add(consultaConsulta);
 
-        consultaPerfil.setText("Perfil");
-        consultaPerfil.addActionListener(new java.awt.event.ActionListener() {
+        menuPrincipal.add(menuConsultas);
+
+        menuPerfilProfesional.setText("Perfil Profesional");
+
+        altaPerfilProfesional.setText("Altas");
+        altaPerfilProfesional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultaPerfilActionPerformed(evt);
+                altaPerfilProfesionalActionPerformed(evt);
             }
         });
-        menuConsultas.add(consultaPerfil);
+        menuPerfilProfesional.add(altaPerfilProfesional);
 
-        menuPrincipal.add(menuConsultas);
+        menuPrincipal.add(menuPerfilProfesional);
 
         setJMenuBar(menuPrincipal);
 
@@ -188,17 +198,17 @@ public class menuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(149, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,11 +249,19 @@ public class menuPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_datosProfesionalesActionPerformed
 
-    private void consultaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPerfilActionPerformed
+    private void altaPerfilProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaPerfilProfesionalActionPerformed
+        // TODO add your handling code here:
         Perfil consulta = new Perfil();
         consulta.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_consultaPerfilActionPerformed
+    }//GEN-LAST:event_altaPerfilProfesionalActionPerformed
+
+    private void alumnoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnoAltasActionPerformed
+        // TODO add your handling code here:
+        AltaAlumno alta = new AltaAlumno();
+        alta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_alumnoAltasActionPerformed
     
     //Clase para establecer la conexión a la base de datos
     public Connection getConnection(){
@@ -300,12 +318,12 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem admiAltas;
     private javax.swing.JMenuItem admiBajas;
     private javax.swing.JMenuItem admiConsultas;
+    private javax.swing.JMenuItem altaPerfilProfesional;
     private javax.swing.JMenuItem alumnoAltas;
     private javax.swing.JMenuItem alumnoBajas;
     private javax.swing.JMenuItem alumnoConsulta;
     private javax.swing.JButton conectarBase;
     private javax.swing.JMenuItem consultaConsulta;
-    private javax.swing.JMenuItem consultaPerfil;
     private javax.swing.JMenuItem datosAltaDocente;
     private javax.swing.JMenuItem datosProfesionales;
     private javax.swing.JMenuItem estudioPlan;
@@ -316,6 +334,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuDatosPersonales;
     private javax.swing.JMenu menuEstudios;
+    private javax.swing.JMenu menuPerfilProfesional;
     private javax.swing.JMenuBar menuPrincipal;
     // End of variables declaration//GEN-END:variables
 }
