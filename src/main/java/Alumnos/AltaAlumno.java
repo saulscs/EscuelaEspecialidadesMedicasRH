@@ -8,6 +8,7 @@ package Alumnos;
 import static Admistrativo.AltasAdministrativo.URL;
 import static Admistrativo.AltasAdministrativo.contraseña;
 import static Admistrativo.AltasAdministrativo.usuario;
+import Admistrativo.BajasAdministrativo;
 import Consultas.Perfil;
 import Main.menuPrincipal;
 import java.sql.Connection;
@@ -207,6 +208,11 @@ public class AltaAlumno extends javax.swing.JFrame {
         menuAlumnos.add(alumnoAltas);
 
         alumnoBajas.setText("Bajas");
+        alumnoBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumnoBajasActionPerformed(evt);
+            }
+        });
         menuAlumnos.add(alumnoBajas);
 
         alumnoConsulta.setText("Colsultas");
@@ -418,6 +424,13 @@ public class AltaAlumno extends javax.swing.JFrame {
         // Limpiar caja
         limpiarCajar();
     }//GEN-LAST:event_LimpiarAltaAlumnos1ActionPerformed
+
+    private void alumnoBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnoBajasActionPerformed
+        // TODO add your handling code here:
+        BajasAdministrativo bajas = new BajasAdministrativo();
+        bajas.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_alumnoBajasActionPerformed
 
     /**
      * @param args the command line arguments

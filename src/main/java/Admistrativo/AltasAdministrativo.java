@@ -4,6 +4,8 @@
 
 package Admistrativo;
 
+import Alumnos.AltaAlumno;
+import Alumnos.BajasAlumno;
 import Consultas.Perfil;
 import Main.menuPrincipal;
 import static Main.menuPrincipal.URL;
@@ -231,9 +233,19 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         menuAlumnos.setText("Alumnos");
 
         alumnoAltas.setText("Altas");
+        alumnoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumnoAltasActionPerformed(evt);
+            }
+        });
         menuAlumnos.add(alumnoAltas);
 
         alumnoBajas.setText("Bajas");
+        alumnoBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumnoBajasActionPerformed(evt);
+            }
+        });
         menuAlumnos.add(alumnoBajas);
 
         alumnoConsulta.setText("Colsultas");
@@ -369,6 +381,21 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         bajas.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_admiBajasActionPerformed
+
+    private void alumnoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnoAltasActionPerformed
+        // TODO add your handling code here:
+        AltaAlumno altas = new AltaAlumno();
+        altas.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_alumnoAltasActionPerformed
+
+    private void alumnoBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnoBajasActionPerformed
+        // TODO add your handling code here:
+        BajasAlumno bajas = new BajasAlumno();
+        bajas.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_alumnoBajasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,6 +8,7 @@ import Consultas.Perfil;
 import DatosPersonales.AltaDocente;
 import DatosPersonales.DatosProfesionales;
 import Alumnos.AltaAlumno;
+import Alumnos.BajasAlumno;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -141,6 +142,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuAlumnos.add(alumnoAltas);
 
         alumnoBajas.setText("Bajas");
+        alumnoBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alumnoBajasActionPerformed(evt);
+            }
+        });
         menuAlumnos.add(alumnoBajas);
 
         alumnoConsulta.setText("Colsultas");
@@ -294,6 +300,13 @@ public class menuPrincipal extends javax.swing.JFrame {
         bajas.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_admiBajasActionPerformed
+
+    private void alumnoBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnoBajasActionPerformed
+        // TODO add your handling code here:
+        BajasAlumno baja = new BajasAlumno();
+        baja.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_alumnoBajasActionPerformed
     
     //Clase para establecer la conexión a la base de datos
     public Connection getConnection(){

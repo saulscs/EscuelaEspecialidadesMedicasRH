@@ -46,7 +46,7 @@ public class BajasAdministrativo extends javax.swing.JFrame {
      * Metodo para limpiar el formualario
      */
     
-    public void limpiarCajar(){
+    public void limpiarCaja(){
         BuscarRFC.setText(null);
         cajaID.setText(null);
         RFCBajas.setText(null);
@@ -413,30 +413,32 @@ public class BajasAdministrativo extends javax.swing.JFrame {
 
     private void LimpiarBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarBajasActionPerformed
         // Limpiar cajas
-        limpiarCajar();
+        limpiarCaja();
     }//GEN-LAST:event_LimpiarBajasActionPerformed
 
     private void EliminarBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBajasActionPerformed
-        // TODO add your handling code here:
-        int desicion = JOptionPane.showConfirmDialog(null, "¿Deseas elimar este usuario?");
+        // Se muestra dialogo para confirmar la eliminación del usuario
         
-        if(desicion == JOptionPane.YES_OPTION){
+        int desicion = JOptionPane.showConfirmDialog(null, "¿Deseas eliminar este usuario?", "Eliminar", JOptionPane.WARNING_MESSAGE);
+        
+        if(desicion == JOptionPane.YES_OPTION){ //Si se acepta se ejecuta la eliminación
            Connection conexion = null;
         
         try {
             conexion = getConnection();
             ps = conexion.prepareStatement("delete from proyectoSaul.administrativo where rfc=?");
-            //ps.setInt(1, Integer.parseInt(RFCBajas.getText()));
             ps.setString(1, RFCBajas.getText());
+            
+            String rfc = RFCBajas.getText();
             
             int resultado = ps.executeUpdate(); //ejecutamos la eliminacion
             
             if(resultado > 0){
-                   JOptionPane.showMessageDialog(null, "Registro eliminado correctamente");
-                   limpiarCajar();
+                   JOptionPane.showMessageDialog(null, "Registro " + rfc + " eliminado correctamente");
+                   limpiarCaja();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al elimar el registro");
-                limpiarCajar();
+                JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
+                limpiarCaja();
             }
             
             conexion.close();
@@ -446,16 +448,14 @@ public class BajasAdministrativo extends javax.swing.JFrame {
         }
         } 
         
-        if(desicion == JOptionPane.NO_OPTION){
+        if(desicion == JOptionPane.NO_OPTION){ // En el no, no se elimina el usuario
             JOptionPane.showMessageDialog(null, "No se elimino usuario");
         }
         
-        if(desicion == JOptionPane.CANCEL_OPTION){
-            JOptionPane.showMessageDialog(null, "Si quiere eliminar usuario vuelva a hacer la busqueda");
-            limpiarCajar();
+        if(desicion == JOptionPane.CANCEL_OPTION){ // En el cancel se limpia la pantalla
+            JOptionPane.showMessageDialog(null, "Si quiere eliminar un usuario vuelva a hacer la busqueda");
+            limpiarCaja();
         }
-        
-        
     }//GEN-LAST:event_EliminarBajasActionPerformed
 
     private void salirBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBajasActionPerformed
