@@ -2,6 +2,7 @@ package Main;
 
 
 import Admistrativo.AltasAdministrativo;
+import Admistrativo.BajasAdministrativo;
 import Consultas.Busqueda;
 import Consultas.Perfil;
 import DatosPersonales.AltaDocente;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
 public class menuPrincipal extends javax.swing.JFrame {
     //Variables para conexion con base de datos
     public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
-    public static final String usuario ="root"; // el usuario que por convención se usa root
+    public static final String usuario ="root"; // El usuario que por convención se usa root
     public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
     /**
      * Creates new form menuPrincipal
@@ -117,6 +118,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         menuAdministrativo.add(admiAltas);
 
         admiBajas.setText("Bajas");
+        admiBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admiBajasActionPerformed(evt);
+            }
+        });
         menuAdministrativo.add(admiBajas);
 
         admiConsultas.setText("Consultas");
@@ -281,6 +287,13 @@ public class menuPrincipal extends javax.swing.JFrame {
         alta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_alumnoAltasActionPerformed
+
+    private void admiBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiBajasActionPerformed
+        // TODO add your handling code here:
+        BajasAdministrativo bajas = new BajasAdministrativo();
+        bajas.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_admiBajasActionPerformed
     
     //Clase para establecer la conexión a la base de datos
     public Connection getConnection(){

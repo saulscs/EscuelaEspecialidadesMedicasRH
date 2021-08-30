@@ -21,9 +21,9 @@ import javax.swing.JOptionPane;
  */
 public class AltasAdministrativo extends javax.swing.JFrame {
     
-     //Variables para conexion con base de datos
+    //Variables para conexion con base de datos
     public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
-    public static final String usuario ="root"; // el usuario que por convención se usa root
+    public static final String usuario ="root"; // El usuario que por convención se usa root
     public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
     PreparedStatement ps;
     ResultSet rs;
@@ -43,6 +43,18 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         
         return conexion;
     }
+    
+    /**
+     * Metodo para limpiar el formualario
+     */
+    
+    public void limpiarCajar(){
+        altaRfc.setText(null);
+        altaNoEmpleado.setText(null);
+        altaArea.setText(null);
+        altaPuesto.setText(null);
+    }
+    
     /**
      * Creates new form AltasAdministrativo
      */
@@ -204,6 +216,11 @@ public class AltasAdministrativo extends javax.swing.JFrame {
         menuAdministrativo.add(admiAltas);
 
         admiBajas.setText("Bajas");
+        admiBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admiBajasActionPerformed(evt);
+            }
+        });
         menuAdministrativo.add(admiBajas);
 
         admiConsultas.setText("Consultas");
@@ -323,8 +340,10 @@ public class AltasAdministrativo extends javax.swing.JFrame {
             
             if(resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Registro insertado correctamente");
+                limpiarCajar();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al insertar el registro");
+                limpiarCajar();
             }
             conexion.close();
         }catch(Exception ex){
@@ -333,19 +352,23 @@ public class AltasAdministrativo extends javax.swing.JFrame {
     }//GEN-LAST:event_altasAdministrativoGuardarActionPerformed
 
     private void altaPerfilProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaPerfilProfesionalActionPerformed
-        // TODO add your handling code here:
+        // Registrar perfil
         Perfil consulta = new Perfil();
         consulta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_altaPerfilProfesionalActionPerformed
 
     private void LimpiarAltaAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarAltaAdministrativoActionPerformed
-        // TODO add your handling code here:
-        altaRfc.setText(null);
-        altaNoEmpleado.setText(null);
-        altaArea.setText(null);
-        altaPuesto.setText(null);
+        // Limpiar caja
+        limpiarCajar();
     }//GEN-LAST:event_LimpiarAltaAdministrativoActionPerformed
+
+    private void admiBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admiBajasActionPerformed
+        // TODO add your handling code here:
+        BajasAdministrativo bajas = new BajasAdministrativo();
+        bajas.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_admiBajasActionPerformed
 
     /**
      * @param args the command line arguments

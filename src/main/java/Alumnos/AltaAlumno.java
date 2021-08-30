@@ -23,11 +23,12 @@ import javax.swing.JOptionPane;
 public class AltaAlumno extends javax.swing.JFrame {
      //Variables para conexion con base de datos
     public static final String URL = "jdbc:mysql://localhost:3306/proyectoSaul?zeroDateTimeBehavior=CONVERT_TO_NULL"; // Se accede al local host y se pone la base  a la que se quiere acceder
-    public static final String usuario ="root"; // el usuario que por convención se usa root
+    public static final String usuario ="root"; // El usuario que por convención se usa root
     public static final String contraseña = ""; // Aqui se coloca la contraseña de MySQL server
     PreparedStatement ps;
     ResultSet rs;
     
+    // Conexion a la base de datos
     public Connection getConnection(){
         Connection conexion=null;
         
@@ -42,6 +43,19 @@ public class AltaAlumno extends javax.swing.JFrame {
         }
         
         return conexion;
+    }
+    
+    /**
+     * Metodo para limpiar el formualario
+     */
+    
+    public void limpiarCajar(){
+        nombreAltaAlumno.setText(null);
+        DireccionAltaAlumno.setText(null);
+        CorreoAltaAlumno.setText(null);
+        TelefonoAltaAlumno.setText(null);
+        CurpAltaAlumno.setText(null);
+        SubirDocumentoAltaAlumno.setText(null);
     }
     /**
      * Creates new form AltaAlumno
@@ -371,7 +385,7 @@ public class AltaAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_altaPerfilProfesionalActionPerformed
 
     private void AltasAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltasAlumnosActionPerformed
-        // TODO add your handling code here:
+
         //Enviar información a la base de datos
         Connection conexion = null;
         
@@ -389,8 +403,10 @@ public class AltaAlumno extends javax.swing.JFrame {
             
             if(resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Registro insertado correctamente");
+                limpiarCajar();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al insertar el registro");
+                limpiarCajar();
             }
             conexion.close();
         }catch(Exception ex){
@@ -399,13 +415,8 @@ public class AltaAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_AltasAlumnosActionPerformed
 
     private void LimpiarAltaAlumnos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarAltaAlumnos1ActionPerformed
-        // TODO add your handling code here:
-        nombreAltaAlumno.setText(null);
-        DireccionAltaAlumno.setText(null);
-        CorreoAltaAlumno.setText(null);
-        TelefonoAltaAlumno.setText(null);
-        CurpAltaAlumno.setText(null);
-        SubirDocumentoAltaAlumno.setText(null);
+        // Limpiar caja
+        limpiarCajar();
     }//GEN-LAST:event_LimpiarAltaAlumnos1ActionPerformed
 
     /**
